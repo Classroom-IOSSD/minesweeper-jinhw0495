@@ -110,13 +110,13 @@ void print_table() {
     }
 
     printf("cell values: 'X' unknown, '%s0%s' no mines close, '1-8' number of near mines, '%sF%s' flag in cell\n",KCYN,KNRM,KGRN,KNRM);
-    if(game_mode == 0) {
+    if(game_mode == 0) 
         printf("f (put/remove Flag in cell), c (Check cell), n (New game), q (Exit game): ");
-    } else if(game_mode == 1) {
+    else if(game_mode == 1)
         printf("Enter (select to put/remove Flag in cell), q (Exit selection): ");
-    } else if(game_mode == 2) {
+    else if(game_mode == 2)
         printf("Enter (select to check cell), q (Exit selection): ");
-    }
+   
 
 
 }
@@ -179,7 +179,8 @@ new_game:
                 }
             }
 
-        } else {							// to make sure that there are the properly number of mines in table
+        } 
+	else {							// to make sure that there are the properly number of mines in table
             i--;
             continue;
         }
@@ -205,29 +206,29 @@ flag_mode:
                 print_table();
                 direction = getch();
                 // arrow direction
-                if(direction == '8') {
+                if(direction == '8') 
                     // up
                     y = (MAX + --y) % MAX;
-                } else if(direction == '2') {
+                else if(direction == '2')
                     // down
                     y = ++y % MAX;
-                } else if(direction == '4') {
+                else if(direction == '4')
                     x = (MAX + --x) % MAX;
-                } else if(direction == '6') {
+                else if(direction == '6') 
                     x = ++x % MAX;
-                } else if(direction == 'c' || direction == 'C') {
+                else if(direction == 'c' || direction == 'C')
                     goto check_mode;
-                } else if(direction == '\n') {
+                else if(direction == '\n') {
                     value = table_array[y][x];
 
                     if (value == 99) {				// mine case
                         table_array[y][x] += 1;
                         nMines -= 1;				// mine found
-                    } else if(value >= 0 && value <= 8) {	// number of mines case (the next cell is a mine)
+                    else if(value >= 0 && value <= 8)	// number of mines case (the next cell is a mine)
                         table_array[y][x] += 20;
-                    } else if(value >= 20 && value <= 28) {
+                    else if(value >= 20 && value <= 28)
                         table_array[y][x] -= 20;
-                    }
+                    
 
                     if(nMines == 0)
                         break;
@@ -248,19 +249,19 @@ check_mode:
                 direction = getch();
 
                 // arrow direction
-                if(direction == '8') {
+                if(direction == '8')
                     // up
                     y = (MAX + --y) % MAX;
-                } else if(direction == '2') {
+                else if(direction == '2')
                     // down
                     y = ++y % MAX;
-                } else if(direction == '4') {
+                else if(direction == '4')
                     x = (MAX + --x) % MAX;
-                } else if(direction == '6') {
+                else if(direction == '6')
                     x = ++x % MAX;
-                } else if(direction == 'f' || direction == 'F') {
+                else if(direction == 'f' || direction == 'F')
                     goto flag_mode;
-                }
+               
 
                 else if(direction == '\n') {
                     value = table_array[y][x];
@@ -311,11 +312,11 @@ end_of_game:
         printf("Are you sure to exit? (y or n)? ");
         ch = getch();
         putchar('\n');
-        if(ch == 'y' || ch == 'Y') {
+        if(ch == 'y' || ch == 'Y')
             break;
-        } else if(ch == 'n' || ch == 'N') {
+        else if(ch == 'n' || ch == 'N')
             goto new_game;
-        }
+       
         printf("Please answer y or n\n");
     } while(1);
     printf("See you next time!\n");
